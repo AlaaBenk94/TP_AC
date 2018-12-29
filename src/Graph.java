@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.image.*;
 
 class Graph{
-   private ArrayList<Edge>[] adj;
+	private ArrayList<Edge>[] adj;
    private int[] coordX;
    private int[] coordY;
    private final int V;
@@ -144,5 +144,39 @@ class Graph{
 	catch (IOException e)
 	    {
 	    }                                             
-    }    
+    }
+
+    ////////////////////////////////////////////// methode ajouter ////////////////////////////////
+
+    int getTaille(){
+   	  return this.V;
+	}
+
+	public ArrayList<Edge>[] getAdj() {
+		return adj;
+	}
+
+	public void setCoordX(int[] coordX) {
+		this.coordX = coordX;
+	}
+
+	public void setCoordY(int[] coordY) {
+		this.coordY = coordY;
+	}
+
+	public Graph clone(){
+   	 Graph clone=new Graph(this.V);
+   	 int[] cordonx=new int[this.V];
+   	 int[] cordony=new int[this.V];
+   	 for(int i=0;i<this.adj.length;i++){
+   	 	for (Edge e :adj[i]){
+   	 		clone.getAdj()[i].add(e.clone());
+		}
+   	 	cordonx[i]=this.coordX[i];
+   	 	cordony[i]=this.coordY[i];
+	 }
+   	 clone.setCoordX(cordonx);
+   	 clone.setCoordY(cordony);
+   	 return clone;
+	}
 }
