@@ -4,6 +4,10 @@ import java.util.Map;
 
 public class Statistique {
     private int nblancement;
+    private double temps_moy;
+    private double variance;
+    private double ecartype;
+    private double probamoy;
     private Map<ArrayList<Edge>,Integer> arbre_ocuronce;
     private Map<ArrayList<Edge>,Float> arbre_poba;
 
@@ -12,18 +16,21 @@ public class Statistique {
         arbre_poba=new HashMap<>();
     };
 
-    public static Statistique Lancer(Algorihtme algo,Graph graph,int nbrfois){
+    public static Statistique Lancer(Algorithme algo, Graph graph, int nbrfois){
         if(algo==null || graph==null) throw new IllegalArgumentException();
 
         Statistique statistique=new Statistique();
-        statistique.setNblancement(nbrfois);
+        statistique.nblancement=nbrfois;
+        statistique.temps_moy=0;
 
         for (int i=0;i<nbrfois;i++){
             Graph graph_clone=graph.clone();
+            long debut = System.currentTimeMillis();
             ArrayList<Edge> echantillon=algo.getArbreCouvrante(graph_clone);
+            statistique.temps_moy+=(System.currentTimeMillis()-debut);
             statistique.add_echantillon(echantillon);
         }
-
+       statistique.temps_moy/=(double)nbrfois;
         statistique.calcule_proba();
 
         return statistique;
@@ -42,13 +49,25 @@ public class Statistique {
     }
 
     private void calcule_proba(){
+
         for(Map.Entry<ArrayList<Edge>,Integer> prototype : arbre_ocuronce.entrySet()) {
             ArrayList<Edge> arbre = prototype.getKey();
             int nb_oc=prototype.getValue();
-            float p=nb_oc/nblancement;
-            arbre_poba.put(arbre,p);
+            arbre_poba.put(arbre,nb_oc/(float)nblancement);
         }
 
+        for(Map.Entry<ArrayList<Edge>,Float> proba :arbre_poba.entrySet()){
+            probamoy+=proba.getValue();
+        }
+        probamoy/=arbre_poba.size();
+
+        variance=0;
+        for(Map.Entry<ArrayList<Edge>,Float> proba :arbre_poba.entrySet()){
+            variance+=(proba.getValue()-probamoy)*(proba.getValue()-probamoy);
+        }
+        variance/=arbre_poba.size();
+
+        ecartype=Math.sqrt(variance);
     }
 
     private boolean egale(ArrayList<Edge> arbre1,ArrayList<Edge> arbre2){
@@ -66,44 +85,41 @@ public class Statistique {
         return true;
     }
 
-    private void affichage(){
+    public void affichage(){
 
         System.out.println( "les résultat de lancement d'algo "+ nblancement+ " fois sur le meme graphe ");
+        System.out.println( "temps d'execution moyenne :"+temps_moy);
+        System.out.println( "la probabilité moyenne des arbre :"+probamoy);
+        System.out.println( "la variance des probabilité des arbre  :"+variance);
+        System.out.println( "ecart-type des probabilité des arbre  :"+ecartype);
 
-        String[] champ={"              arbre             ","   nombre d'occurence   ","   probabilité  "};
-        for (String s :champ)System.out.print(s);
+        String[] champ={"  num  ","              arbre             ","        nombre d'occurence   ","       probabilité  "};
+        for (String s :champ)System.out.print(s);System.out.println();
 
+        int num=0;
         for(Map.Entry<ArrayList<Edge>,Integer> prototype : arbre_ocuronce.entrySet()) {
             ArrayList<Edge> arbre = prototype.getKey();
             int nb_oc = prototype.getValue();
-
+            float proba = arbre_poba.get(arbre);
+            num++;
+            String s=get_affichage(arbre);
+            System.out.print("   "+num+")  ");
+            for(int i=0;i<(32-s.length())/2;i++)System.out.print(" ");
+            System.out.print(s);
+            for(int i=0;i<(32-s.length())/2;i++)System.out.print(" ");
+            System.out.println("             "+nb_oc+"                  "+proba);
         }
 
 
     }
 
-    public int getNblancement() {
-        return nblancement;
+    private String get_affichage(ArrayList<Edge> arbre){
+        String s="";
+        for(Edge e : arbre )s+=" "+e.from+"--"+e.to+" ";
+        return s;
     }
 
-    public void setNblancement(int nblancement) {
-        this.nblancement = nblancement;
-    }
 
-    public Map<ArrayList<Edge>, Integer> getArbre_ocuronce() {
-        return arbre_ocuronce;
-    }
 
-    public void setArbre_ocuronce(Map<ArrayList<Edge>, Integer> arbre_ocuronce) {
-        this.arbre_ocuronce = arbre_ocuronce;
-    }
-
-    public Map<ArrayList<Edge>, Float> getArbre_poba() {
-        return arbre_poba;
-    }
-
-    public void setArbre_poba(Map<ArrayList<Edge>, Float> arbre_poba) {
-        this.arbre_poba = arbre_poba;
-    }
 
 }

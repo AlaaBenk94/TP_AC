@@ -29,7 +29,7 @@ public class FindUnion {
         int racine_elem1=find(elem1);
         int racine_elem2=find(elem2);
         if( racine_elem1!=racine_elem2)
-            parent[elem2]=elem1;
+            parent[racine_elem1]=racine_elem2;
     }
     public void affichage(){
         System.out.println("------------------");

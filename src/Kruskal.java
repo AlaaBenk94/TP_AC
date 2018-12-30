@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Kruskal implements Algorihtme {
+public class Kruskal implements Algorithme {
     @Override
     public ArrayList<Edge> getArbreCouvrante(Graph graph) {
 

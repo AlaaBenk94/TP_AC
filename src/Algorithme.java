@@ -1,5 +1,5 @@
 import java.util.ArrayList;
 
-public interface Algorihtme {
+public interface Algorithme {
     public ArrayList<Edge> getArbreCouvrante(Graph graph);
 }
