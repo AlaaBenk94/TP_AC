@@ -243,9 +243,6 @@ class Graph{
 
     ////////////////////////////////////////////// methode ajouter ////////////////////////////////
 
-    int getTaille(){
-   	  return this.V;
-	}
 
 	public ArrayList<Edge>[] getAdj() {
 		return adj;
@@ -274,4 +271,6 @@ class Graph{
    	 clone.setCoordY(cordony);
    	 return clone;
 	}
+
+
 }

@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Kruskal implements Algorihtme {
+public class Kruskal implements Algorithme {
     @Override
     public ArrayList<Edge> getArbreCouvrante(Graph graph) {
 
@@ -9,7 +9,7 @@ public class Kruskal implements Algorihtme {
 
         ArrayList<Edge> arbre =new ArrayList<>();
         ArrayList<Edge> aretes=melanger(graph.edges());
-        FindUnion ver =new FindUnion(graph.getTaille());
+        FindUnion ver =new FindUnion(graph.vertices());
 
         for(Edge arete:aretes){
             int sommet1=arete.from;
