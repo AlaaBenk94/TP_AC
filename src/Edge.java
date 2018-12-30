@@ -18,6 +18,11 @@ class Edge
 
     ////////////////////////////////////////////// methode ajouter ////////////////////////////////
 
+
+    public void setUsed(boolean used) {
+        this.used = used;
+    }
+
     protected Edge clone(){
      Edge clone= new Edge(this.from,this.to);
      clone.used=this.used;
