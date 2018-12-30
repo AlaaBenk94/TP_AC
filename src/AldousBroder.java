@@ -10,6 +10,7 @@ public class AldousBroder implements Algorihtme {
     private int sommetCurrent;
     private ArrayList<Edge> arbreCouvrant;
     private Display disp;
+    private boolean animationOn;
 
     public AldousBroder(){
         rand = new Random();
@@ -17,28 +18,42 @@ public class AldousBroder implements Algorihtme {
         arbreCouvrant = new ArrayList<>();
         disp = new Display();
         disp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        animationOn = true;
     }
 
     @Override
     public ArrayList<Edge> getArbreCouvrante(Graph graph) {
 
-
         initialisation(graph.vertices());
 
-        disp.setImage(graph.toImage(sommetCurrent, sommetsVisites));
+        drawAnimation(graph);
 
         while(nbSommetNonVisite > 0) {
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            graph.adj(sommetCurrent);
             sommetSuivant(graph);
-            disp.setImage(graph.toImage(sommetCurrent, sommetsVisites));
+            drawAnimation(graph);
         }
 
         return arbreCouvrant;
+    }
+
+    private void drawAnimation(Graph graph){
+        if(!animationOn)
+            return;
+
+        waitForAnimation();
+
+        disp.setImage(graph.toImage(sommetCurrent, sommetsVisites));
+
+    }
+
+    private void waitForAnimation() {
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
     }
 
     private void initialisation(int N) {
