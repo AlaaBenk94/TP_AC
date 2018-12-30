@@ -75,7 +75,7 @@ class Graph{
 	g.addEdge(new Edge(0,2));
 	g.addEdge(new Edge(0,3));
 	g.addEdge(new Edge(1,2));
-	g.addEdge(new Edge(2,3));/////////////remplacer 1--3 par 2--3  pour obtenir le graph g1 /
+	g.addEdge(new Edge(1,3));
 	return g;
     }
 
