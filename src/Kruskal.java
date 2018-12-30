@@ -9,7 +9,7 @@ public class Kruskal implements Algorithme {
 
         ArrayList<Edge> arbre =new ArrayList<>();
         ArrayList<Edge> aretes=melanger(graph.edges());
-        FindUnion ver =new FindUnion(graph.getTaille());
+        FindUnion ver =new FindUnion(graph.vertices());
 
         for(Edge arete:aretes){
             int sommet1=arete.from;

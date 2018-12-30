@@ -6,7 +6,7 @@ public class Wilson implements Algorithme {
     @Override
     public ArrayList<Edge> getArbreCouvrante(Graph graph) {
         if(graph==null)throw new IllegalArgumentException();
-        visiter=new boolean[graph.getTaille()];
+        visiter=new boolean[graph.vertices()];
         visiter[0]=true;
         ArrayList<Edge>arbre=new ArrayList<>();
         while (!tout_visiter()){
