@@ -22,9 +22,10 @@ public class AldousBroder implements Algorihtme {
     @Override
     public ArrayList<Edge> getArbreCouvrante(Graph graph) {
 
-        disp.setImage(graph.toImage());
 
         initialisation(graph.vertices());
+
+        disp.setImage(graph.toImage(sommetCurrent, sommetsVisites));
 
         while(nbSommetNonVisite > 0) {
             try {
@@ -34,7 +35,7 @@ public class AldousBroder implements Algorihtme {
             }
             graph.adj(sommetCurrent);
             sommetSuivant(graph);
-            disp.setImage(graph.toImage());
+            disp.setImage(graph.toImage(sommetCurrent, sommetsVisites));
         }
 
         return arbreCouvrant;
