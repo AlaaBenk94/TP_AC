@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class AldousBroder implements Algorihtme {
+public class AldousBroder implements Algorithme {
 
     private Random rand;
     private int nbSommetNonVisite;
