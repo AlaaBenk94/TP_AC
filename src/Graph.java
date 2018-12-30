@@ -162,7 +162,7 @@ class Graph{
 			if(i == sommetCurrent)
 				g2d.setColor(new Color(255,153,153));
 			else if(sommetsVisite[i])
-				g2d.setColor(Color.DARK_GRAY);
+				g2d.setColor(new Color(100,100,100));
 			else
 				g2d.setColor(Color.WHITE);
 			g2d.fillOval(coordX[i]-15, coordY[i]-15,30,30);
