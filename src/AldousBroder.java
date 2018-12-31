@@ -15,11 +15,11 @@ public class AldousBroder implements Algorithme {
     public AldousBroder(){
         rand = new Random();
         nbSommetNonVisite = 0;
+        arbreCouvrant = new ArrayList<>();
         disp = new Display();
         disp2 = new Display();
         disp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        disp2.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        animationOn = true;
+        animationOn = false;
     }
 
     @Override
@@ -95,7 +95,10 @@ public class AldousBroder implements Algorithme {
         Graph g = Graph.example();
         AldousBroder ab = new AldousBroder();
 
-        ab.getArbreCouvrante(g);
+        for(Edge e : ab.getArbreCouvrante(g)) {
+            System.out.println(e.toString());
+        }
+
         System.out.println("FINISHED");
     }
 

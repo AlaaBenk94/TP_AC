@@ -14,6 +14,19 @@ public class main {
 
         System.out.println();
 
+
+
+        System.out.println("////////////////////////////// Analyse d'Algo de Aldous-Broder //////////////////////////");
+
+        algo = new AldousBroder();
+
+        stat = Statistique.Lancer(algo, g,1000000);
+        stat.affichage();
+
+        System.out.println();
+
+
+
         System.out.println("////////////////////////////// Analyse d'Algo de Wilson //////////////////////////");
 
         algo = new Wilson();
@@ -22,6 +35,8 @@ public class main {
         stat.affichage();
 
         System.out.println();
+
+
 
 
     }

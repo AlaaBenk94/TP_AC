@@ -18,6 +18,10 @@ class Edge
 
     ////////////////////////////////////////////// methode ajouter ////////////////////////////////
 
+    public String toString(){
+        return "( " + this.from + ", " + this.to + ", " + this.used + " )";
+    }
+
 
     public void setUsed(boolean used) {
         this.used = used;
