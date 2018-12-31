@@ -59,7 +59,10 @@ public class Wilson implements Algorithme {
     }
 
     void visiter_chemin(ArrayList<Edge> chemin){
-        for (Edge arc :chemin)visiter[arc.from]=visiter[arc.to]=true;
+        for (Edge arc :chemin){
+            visiter[arc.from]=visiter[arc.to]=true;
+            arc.used=true;
+        }
     }
 
     void ajouter_chemin(ArrayList<Edge>arbre,ArrayList<Edge> chemin){
