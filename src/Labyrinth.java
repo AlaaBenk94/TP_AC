@@ -40,6 +40,36 @@ public class Labyrinth {
         return true;
     }
 
+    public int getDistance(){
+        return getDistance(-1, start)-1;
+    }
+
+    private int getDistance(int pred, int s){
+        ArrayList<Edge> arretes = getUsedArrets(s);
+
+
+        if(s != start)
+            arretes.removeIf(e -> (e.from == pred || e.to == pred));
+
+        for(Edge e : arretes) {
+            int ret = getDistance(s, e.other(s));
+            if(ret != -1)
+                return 1 + ret;
+        }
+
+        return s==end?1:-1;
+    }
+
+    private ArrayList<Edge> getUsedArrets(int sommet){
+        ArrayList<Edge> arretes = new ArrayList<>();
+        for (Edge e : graph.adj(sommet))
+            if(e.used)
+                arretes.add(e);
+        return arretes;
+    }
+
+
+
     public void setAlgo(Algorithme algo) {
         this.algo = algo;
     }
@@ -60,9 +90,10 @@ public class Labyrinth {
     }
 
     public static void main(String[] args){
-        Labyrinth laby = new Labyrinth(new AldousBroder(), 5);
+        Labyrinth laby = new Labyrinth(new AldousBroder(), 6);
         laby.ShowMe();
         System.out.println("Nb Culs de Sac :> " + laby.getNombreCulDeSac());
+        System.out.println("Distance Start2End :> " + laby.getDistance());
     }
 
 }

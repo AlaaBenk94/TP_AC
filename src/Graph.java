@@ -120,13 +120,13 @@ class Graph{
 	    }
 	// dessine les sommets 
 	for (int i = 0; i < V; i++)
-	    {
+	{
 		g2d.setColor(Color.WHITE);
 		g2d.fillOval(coordX[i]-15, coordY[i]-15,30,30);
 		g2d.setColor(Color.BLACK);
 		g2d.drawOval(coordX[i]-15, coordY[i]-15,30,30);
 		g2d.drawString(Integer.toString(i), coordX[i], coordY[i]);
-	    }
+	}
 
 	return image;
     }
