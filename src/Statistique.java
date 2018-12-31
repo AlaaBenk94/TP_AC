@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,7 +64,7 @@ public class Statistique {
 
         variance=0;
         for(Map.Entry<ArrayList<Edge>,Float> proba :arbre_poba.entrySet()){
-            variance+=(proba.getValue()-probamoy)*(proba.getValue()-probamoy);
+            variance+=(double)Math.round( Math.pow(proba.getValue()-probamoy,2)*10000);
         }
         variance/=arbre_poba.size();
 
@@ -88,7 +89,7 @@ public class Statistique {
     public void affichage(){
 
         System.out.println( "les résultat de lancement d'algo "+ nblancement+ " fois sur le meme graphe ");
-        System.out.println( "temps d'execution moyenne :"+temps_moy);
+        System.out.println( "temps d'execution moyenne :"+new BigDecimal(temps_moy).toString().substring(0,20));
         System.out.println( "la probabilité moyenne des arbre :"+probamoy);
         System.out.println( "la variance des probabilité des arbre  :"+variance);
         System.out.println( "ecart-type des probabilité des arbre  :"+ecartype);
