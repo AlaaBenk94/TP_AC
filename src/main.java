@@ -14,6 +14,8 @@ public class main {
 
         System.out.println();
 
+
+
         System.out.println("////////////////////////////// Analyse d'Algo de Aldous-Broder //////////////////////////");
 
         algo = new AldousBroder();
@@ -22,6 +24,8 @@ public class main {
         stat.affichage();
 
         System.out.println();
+
+
 
         System.out.println("////////////////////////////// Analyse d'Algo de Wilson //////////////////////////");
 

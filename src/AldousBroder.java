@@ -18,7 +18,7 @@ public class AldousBroder implements Algorithme {
         arbreCouvrant = new ArrayList<>();
         disp = new Display();
         disp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        animationOn = true;
+        animationOn = false;
     }
 
     @Override
@@ -66,6 +66,7 @@ public class AldousBroder implements Algorithme {
         sommetCurrent = rand.nextInt(N);
         sommetsVisites[sommetCurrent] = true;
         nbSommetNonVisite--;
+        arbreCouvrant=new ArrayList<>();
     }
 
     private void sommetSuivant(Graph graph){
