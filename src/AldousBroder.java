@@ -9,15 +9,16 @@ public class AldousBroder implements Algorithme {
     private boolean[] sommetsVisites;
     private int sommetCurrent;
     private ArrayList<Edge> arbreCouvrant;
-    private Display disp;
+    private Display disp, disp2;
     private boolean animationOn;
 
     public AldousBroder(){
         rand = new Random();
         nbSommetNonVisite = 0;
-        arbreCouvrant = new ArrayList<>();
         disp = new Display();
+        disp2 = new Display();
         disp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        disp2.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         animationOn = true;
     }
 
@@ -43,7 +44,7 @@ public class AldousBroder implements Algorithme {
         waitForAnimation();
 
         disp.setImage(graph.toImage(sommetCurrent, sommetsVisites));
-
+        disp2.setImage(graph.toLabyrinth());
     }
 
     private void waitForAnimation() {
@@ -57,6 +58,7 @@ public class AldousBroder implements Algorithme {
     }
 
     private void initialisation(int N) {
+        arbreCouvrant = new ArrayList<>();
         nbSommetNonVisite = N;
 
         sommetsVisites = new boolean[N];
@@ -94,7 +96,6 @@ public class AldousBroder implements Algorithme {
         AldousBroder ab = new AldousBroder();
 
         ab.getArbreCouvrante(g);
-
         System.out.println("FINISHED");
     }
 
