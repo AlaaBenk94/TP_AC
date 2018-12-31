@@ -64,8 +64,9 @@ public class Statistique {
 
         variance=0;
         for(Map.Entry<ArrayList<Edge>,Float> proba :arbre_poba.entrySet()){
-            variance+=(double)Math.round( Math.pow(proba.getValue()-probamoy,2)*10000);
+            variance+= Math.pow(probamoy-proba.getValue(),2);
         }
+        variance=(double)Math.round(variance*1000);
         variance/=arbre_poba.size();
 
         ecartype=Math.sqrt(variance);

@@ -53,4 +53,5 @@ public class Kruskal implements Algorithme {
     public ArrayList<BufferedImage> getAnimation(){
         return animation_imgs;
     }
+
 }

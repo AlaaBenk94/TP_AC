@@ -11,7 +11,7 @@ public class Wilson implements Algorithme {
     public ArrayList<Edge> getArbreCouvrante(Graph graph) {
         if(graph==null)throw new IllegalArgumentException();
         visiter=new boolean[graph.vertices()];
-        visiter[0]=true;
+        visiter[new Random().nextInt(visiter.length)]=true;
         ArrayList<Edge>arbre=new ArrayList<>();
         while (!tout_visiter()){
             int suiv=choix_non_visiter();
