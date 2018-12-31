@@ -183,44 +183,50 @@ class Graph{
 	 * Pour dissiner les sommets visités et le sommet courant
 	 * @return
 	 */
-	public BufferedImage toLabyrinth(int sommetCurrent, boolean[] sommetsVisite){
+	public BufferedImage toLabyrinth(){
+		final int TAILL_RECT = 50;
+		final int mdl = TAILL_RECT/2;
+		final int STROCK_WIDTH = TAILL_RECT/3;
+
 		BufferedImage image = new BufferedImage(400, 400, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2d = image.createGraphics();
 		g2d.setBackground(Color.WHITE);
-		g2d.fillRect(0, 0, 400, 400);
 		g2d.setColor(Color.BLACK);
+		g2d.fillRect(0, 0, 400, 400);
 		BasicStroke bs = new BasicStroke(2);
-		BasicStroke bs2 = new BasicStroke(4);
 		g2d.setStroke(bs);
-		// dessine les arêtes
+		// dessine les chambres
+		for (int i = 0; i < V; i++)
+		{
+			g2d.setColor(Color.WHITE);
+			g2d.fillRect(coordX[i]-mdl, coordY[i]-mdl,TAILL_RECT,TAILL_RECT);
+			g2d.setColor(Color.BLACK);
+			g2d.drawRect(coordX[i]-mdl, coordY[i]-mdl,TAILL_RECT,TAILL_RECT);
+		}
+
+		// dessine le chemin
+
+		BasicStroke bss = new BasicStroke(STROCK_WIDTH);
+		g2d.setStroke(bss);
+
 		for (Edge e: edges())
 		{
 			int i = e.from;
 			int j = e.to;
 			if (e.used) {
-				g2d.setStroke(bs2);
-				g2d.setColor(Color.RED);
-			} else {
-				g2d.setStroke(bs);
-				g2d.setColor(Color.GRAY);
-			}
-			g2d.drawLine(coordX[i], coordY[i], coordX[j], coordY[j]);
-		}
-		g2d.setStroke(bs);
-		// dessine les sommets
-		for (int i = 0; i < V; i++)
-		{
-			if(i == sommetCurrent)
-				g2d.setColor(new Color(255,153,153));
-			else if(sommetsVisite[i])
-				g2d.setColor(new Color(100,100,100));
-			else
 				g2d.setColor(Color.WHITE);
-			g2d.fillOval(coordX[i]-15, coordY[i]-15,30,30);
-			g2d.setColor(Color.BLACK);
-			g2d.drawOval(coordX[i]-15, coordY[i]-15,30,30);
-			g2d.drawString(Integer.toString(i), coordX[i]-7.5f, coordY[i]+5f);
+				g2d.drawLine(coordX[i], coordY[i], coordX[j], coordY[j]);
+			}
 		}
+
+		int startX = coordX[0];
+		int startY = coordY[0];
+		int endX = coordX[V-1];
+		int endY = coordY[V-1];
+
+		g2d.setColor(Color.WHITE);
+		g2d.drawLine(startX-mdl, startY, startX, startY);
+		g2d.drawLine(endX, endY, endX+mdl, endY);
 
 		return image;
 	}

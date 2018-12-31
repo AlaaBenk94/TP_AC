@@ -1,5 +1,3 @@
-import javafx.animation.Animation;
-
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
@@ -55,4 +53,5 @@ public class Kruskal implements Algorithme {
     public ArrayList<BufferedImage> getAnimation(){
         return animation_imgs;
     }
+
 }
