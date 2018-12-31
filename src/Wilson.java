@@ -1,8 +1,12 @@
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Wilson implements Algorithme {
     private boolean[] visiter;
+    private boolean animation;
+    ArrayList<BufferedImage> animation_imgs;
+
     @Override
     public ArrayList<Edge> getArbreCouvrante(Graph graph) {
         if(graph==null)throw new IllegalArgumentException();
@@ -12,11 +16,8 @@ public class Wilson implements Algorithme {
         while (!tout_visiter()){
             int suiv=choix_non_visiter();
             ArrayList<Edge> chemin=marche(suiv,graph);
-           // System.out.println(suiv);
-          // for (Edge e:chemin)System.out.print(e.from+"--"+e.to+" ");System.out.println();
             chemin=Eliminer_cycle(chemin,suiv);
-          // for (Edge e:chemin)System.out.print(e.from+"--"+e.to+" ");System.out.println();
-            visiter_chemin(chemin);
+            visiter_chemin(chemin,graph);
             ajouter_chemin(arbre,chemin);
         }
         return arbre;
@@ -43,8 +44,6 @@ public class Wilson implements Algorithme {
         int sommet=depar;
         while (!visiter[sommet]) {
             ArrayList<Edge> adj = graph.getAdj()[sommet];
-            //System.out.print(sommet+"   ");
-            //for(Edge arc :adj)System.out.print(arc.from+"--"+arc.to+" ");System.out.println();
             Edge suiv = adj.get(random.nextInt(adj.size()));
             chemin.add(suiv);
             sommet=get_adj(sommet,suiv);
@@ -58,10 +57,11 @@ public class Wilson implements Algorithme {
         else return arc.from;
     }
 
-    void visiter_chemin(ArrayList<Edge> chemin){
+    void visiter_chemin(ArrayList<Edge> chemin,Graph graph){
         for (Edge arc :chemin){
             visiter[arc.from]=visiter[arc.to]=true;
             arc.used=true;
+            animation_imgs.add(graph.toImage());
         }
     }
 
@@ -113,11 +113,14 @@ public class Wilson implements Algorithme {
         return chemin_sans_rep;
     }
 
-    void aff(ArrayList<Edge> chemin){
-        for (Edge e:chemin){
-            System.out.print(e.from+"--"+e.to+" ");
-        }
-        System.out.println();
+    public void AnimationOn(){
+        animation=true;
+    }
+    public void AnimationOff(){
+        animation=false;
+    }
+    public ArrayList<BufferedImage> getAnimation(){
+        return animation_imgs;
     }
 
 }
