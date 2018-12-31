@@ -61,7 +61,7 @@ public class Wilson implements Algorithme {
         for (Edge arc :chemin){
             visiter[arc.from]=visiter[arc.to]=true;
             arc.used=true;
-            animation_imgs.add(graph.toImage());
+            if(animation)animation_imgs.add(graph.toImage(-1,visiter));
         }
     }
 
@@ -115,6 +115,7 @@ public class Wilson implements Algorithme {
 
     public void AnimationOn(){
         animation=true;
+        animation_imgs=new ArrayList<>();
     }
     public void AnimationOff(){
         animation=false;
