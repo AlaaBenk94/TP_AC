@@ -51,8 +51,11 @@ public class Simulation {
 //        AldousBroder ab = new AldousBroder(sim);
 //        ab.getArbreCouvrante(Graph.Grid(5));
 
-        Kruskal k = new Kruskal(sim);
-        k.getArbreCouvrante(Graph.Grid(5));
+//        Kruskal k = new Kruskal(sim);
+//        k.getArbreCouvrante(Graph.Grid(5));
+
+        Wilson w = new Wilson(sim);
+        w.getArbreCouvrante(Graph.Grid(5));
 
         sim.play();
 

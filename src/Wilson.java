@@ -2,10 +2,17 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Wilson implements Algorithme {
+public class Wilson extends Simulated implements Algorithme {
+
     private boolean[] visiter;
-    private boolean animation;
-    ArrayList<BufferedImage> animation_imgs;
+
+    public Wilson(){
+        super();
+    }
+
+    public Wilson(Simulation sim) {
+        super(sim);
+    }
 
     @Override
     public ArrayList<Edge> getArbreCouvrante(Graph graph) {
@@ -61,7 +68,7 @@ public class Wilson implements Algorithme {
         for (Edge arc :chemin){
             visiter[arc.from]=visiter[arc.to]=true;
             arc.used=true;
-            if(animation)animation_imgs.add(graph.toImage(-1,visiter));
+            super.drawAnimation(graph,-1,visiter);
         }
     }
 
@@ -112,16 +119,4 @@ public class Wilson implements Algorithme {
             }
         return chemin_sans_rep;
     }
-
-    public void AnimationOn(){
-        animation=true;
-        animation_imgs=new ArrayList<>();
-    }
-    public void AnimationOff(){
-        animation=false;
-    }
-    public ArrayList<BufferedImage> getAnimation(){
-        return animation_imgs;
-    }
-
 }
