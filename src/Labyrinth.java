@@ -5,22 +5,24 @@ public class Labyrinth {
 
     private Graph graph;
     private ArrayList<Edge> arbreCouvrant;
+    private Algorithme algo;
     private int start;
     private int end;
 
-    public Labyrinth(int dim){
+    public Labyrinth(int dim, Algorithme algo){
+        this.algo = algo;
         start = 0;
         end = dim*dim-1;
         graph = Graph.Grid(dim);
     }
 
     public static Labyrinth creerLabyrinth(int D, Algorithme algo){
-        Labyrinth laby = new Labyrinth(5);
-        laby.construireChemin(algo);
+        Labyrinth laby = new Labyrinth(D, algo);
+        laby.construireChemin();
         return laby;
     }
 
-    public void construireChemin(Algorithme algo) {
+    public void construireChemin() {
         arbreCouvrant = algo.getArbreCouvrante(this.graph);
     }
 
@@ -82,19 +84,17 @@ public class Labyrinth {
 
     public void ShowMe(){
         Display disp = new Display();
-        Display disp2 = new Display();
+//        Display disp2 = new Display();
 
         disp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        disp2.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        disp2.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         disp.setImage(graph.toImage(-1,null));
-        disp2.setImage(graph.toLabyrinth());
+//        disp2.setImage(graph.toLabyrinth());
     }
 
     public static void main(String[] args){
-        Labyrinth laby = Labyrinth.creerLabyrinth(6, new AldousBroder());
-        laby.reset();
-        laby.construireChemin(new Kruskal());
+        Labyrinth laby = Labyrinth.creerLabyrinth(2, new AldousBroder());
         laby.ShowMe();
         System.out.println("Nb Culs de Sac :> " + laby.getNombreCulDeSac());
         System.out.println("Distance Start2End :> " + laby.getDistance());
