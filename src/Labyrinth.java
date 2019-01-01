@@ -93,11 +93,11 @@ public class Labyrinth {
 //        disp2.setImage(graph.toLabyrinth());
     }
 
-    public static void main(String[] args){
+   /* public static void main(String[] args){
         Labyrinth laby = Labyrinth.creerLabyrinth(2, new AldousBroder());
         laby.ShowMe();
         System.out.println("Nb Culs de Sac :> " + laby.getNombreCulDeSac());
         System.out.println("Distance Start2End :> " + laby.getDistance());
-    }
+    }*/
 
 }

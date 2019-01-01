@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class AldousBroder implements Algorithme {
+public class AldousBroder extends Simulated implements Algorithme {
 
     private Random rand;
     private int nbSommetNonVisite;
@@ -9,51 +9,32 @@ public class AldousBroder implements Algorithme {
     private int sommetCurrent;
     private ArrayList<Edge> arbreCouvrant;
     private Display disp, disp2;
-    private boolean animationOn;
 
     public AldousBroder(){
         rand = new Random();
         nbSommetNonVisite = 0;
         arbreCouvrant = new ArrayList<>();
-//        disp = new Display();
-//        disp2 = new Display();
-//        disp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        animationOn = false;
+    }
+
+    public AldousBroder(Simulation sim){
+        super(sim);
+        rand = new Random();
+        nbSommetNonVisite = 0;
+        arbreCouvrant = new ArrayList<>();
     }
 
     @Override
     public ArrayList<Edge> getArbreCouvrante(Graph graph) {
 
         initialisation(graph.vertices());
-
-//        drawAnimation(graph);
+        super.drawAnimation(graph, sommetCurrent, sommetsVisites);
 
         while(nbSommetNonVisite > 0) {
             sommetSuivant(graph);
-//            drawAnimation(graph);
+            super.drawAnimation(graph, sommetCurrent, sommetsVisites);
         }
 
         return arbreCouvrant;
-    }
-
-    private void drawAnimation(Graph graph){
-        if(!animationOn)
-            return;
-
-        waitForAnimation();
-
-        disp.setImage(graph.toImage(sommetCurrent, sommetsVisites));
-        disp2.setImage(graph.toLabyrinth());
-    }
-
-    private void waitForAnimation() {
-
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        
     }
 
     private void initialisation(int N) {
@@ -71,7 +52,6 @@ public class AldousBroder implements Algorithme {
 
     private void sommetSuivant(Graph graph){
         rand = new Random();
-//        ArrayList<Edge> voisins = graph.adj(sommetCurrent);
         ArrayList<Edge> voisins = graph.getAdj()[sommetCurrent];
         Edge arreteChoisie = voisins.get(rand.nextInt(voisins.size()));
 
@@ -82,7 +62,6 @@ public class AldousBroder implements Algorithme {
             sommetsVisites[sommetCurrent] = true;
             nbSommetNonVisite--;
             arreteChoisie.setUsed(true);
-//            graph.addEdge(arreteChoisie);
         }
     }
 
@@ -90,7 +69,7 @@ public class AldousBroder implements Algorithme {
      * Le main pour les tests
      * @param args
      */
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
         Graph g = Graph.example();
         AldousBroder ab = new AldousBroder();
@@ -100,6 +79,6 @@ public class AldousBroder implements Algorithme {
         }
 
         System.out.println("FINISHED");
-    }
+    }*/
 
 }
