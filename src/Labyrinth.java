@@ -3,21 +3,33 @@ import java.util.ArrayList;
 
 public class Labyrinth {
 
-    private Algorithme algo;
     private Graph graph;
     private ArrayList<Edge> arbreCouvrant;
-    private int start = 0;
+    private int start;
     private int end;
 
-    public Labyrinth(Algorithme algo, int dim){
-        this.algo = algo;
+    public Labyrinth(int dim){
+        start = 0;
         end = dim*dim-1;
-        creerLabyrinth(dim);
+        graph = Graph.Grid(dim);
     }
 
-    public void creerLabyrinth(int D){
-        graph = Graph.Grid(D);
-        arbreCouvrant = algo.getArbreCouvrante(graph);
+    public static Labyrinth creerLabyrinth(int D, Algorithme algo){
+        Labyrinth laby = new Labyrinth(5);
+        laby.construireChemin(algo);
+        return laby;
+    }
+
+    public void construireChemin(Algorithme algo) {
+        arbreCouvrant = algo.getArbreCouvrante(this.graph);
+    }
+
+    public void reset() {
+        for( int s=0 ; s<graph.vertices() ; s++)
+            for(Edge e : graph.getAdj()[s])
+                e.used = false;
+
+        arbreCouvrant = null;
     }
 
     public int getNombreCulDeSac(){
@@ -68,16 +80,6 @@ public class Labyrinth {
         return arretes;
     }
 
-
-
-    public void setAlgo(Algorithme algo) {
-        this.algo = algo;
-    }
-
-    public Algorithme getAlgo() {
-        return algo;
-    }
-
     public void ShowMe(){
         Display disp = new Display();
         Display disp2 = new Display();
@@ -90,7 +92,9 @@ public class Labyrinth {
     }
 
     public static void main(String[] args){
-        Labyrinth laby = new Labyrinth(new AldousBroder(), 6);
+        Labyrinth laby = Labyrinth.creerLabyrinth(6, new AldousBroder());
+        laby.reset();
+        laby.construireChemin(new Kruskal());
         laby.ShowMe();
         System.out.println("Nb Culs de Sac :> " + laby.getNombreCulDeSac());
         System.out.println("Distance Start2End :> " + laby.getDistance());
