@@ -82,15 +82,19 @@ public class Labyrinth {
         return arretes;
     }
 
-    public void ShowMe(){
-        Display disp = new Display();
-//        Display disp2 = new Display();
+    public void ShowMe(Display gd, Display ld){
+        Display graphDisp = gd;
+        Display labyDisp = ld;
+        if (graphDisp == null)
+            graphDisp = new Display();
+        if(labyDisp == null)
+            labyDisp = new Display();
 
-        disp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//        disp2.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        graphDisp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        labyDisp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        disp.setImage(graph.toImage(-1,null));
-//        disp2.setImage(graph.toLabyrinth());
+        graphDisp.setImage(graph.toImage(-1,null));
+        labyDisp.setImage(graph.toLabyrinth());
     }
 
    /* public static void main(String[] args){
