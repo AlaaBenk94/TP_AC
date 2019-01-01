@@ -27,6 +27,10 @@ public class LabyStatistiques {
         return MoyNbCulSac;
     }
 
+    public int getNbCycle() {
+        return nbCycle;
+    }
+
     public void printStat(){
         System.out.println("********************************************************");
         System.out.println("Nombre d'execution : " + this.nbCycle);
