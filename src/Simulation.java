@@ -48,8 +48,11 @@ public class Simulation {
     public static void main(String[] args){
 
         Simulation sim = new Simulation();
-        AldousBroder ab = new AldousBroder(sim);
-        ab.getArbreCouvrante(Graph.Grid(5));
+//        AldousBroder ab = new AldousBroder(sim);
+//        ab.getArbreCouvrante(Graph.Grid(5));
+
+        Kruskal k = new Kruskal(sim);
+        k.getArbreCouvrante(Graph.Grid(5));
 
         sim.play();
 

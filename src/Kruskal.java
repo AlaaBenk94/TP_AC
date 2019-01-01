@@ -2,9 +2,15 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Kruskal implements Algorithme {
-    private boolean animation;
-    ArrayList<BufferedImage> animation_imgs;
+public class Kruskal extends Simulated implements Algorithme {
+
+    public Kruskal(){
+        super();
+    }
+
+    public Kruskal(Simulation sim){
+        super(sim);
+    }
 
     @Override
     public ArrayList<Edge> getArbreCouvrante(Graph graph) {
@@ -22,7 +28,7 @@ public class Kruskal implements Algorithme {
                  ver.union(sommet1,sommet2);
                  arbre.add(arete);
                  arete.used=true;
-                 if(animation)animation_imgs.add(graph.toImage());
+                 super.drawAnimation(graph, -1, null);
             }
         }
 
@@ -43,15 +49,6 @@ public class Kruskal implements Algorithme {
             listmelanger.set(ind2,edge);
         }
         return listmelanger;
-    }
-    public void AnimationOn(){
-        animation=true;
-    }
-    public void AnimationOff(){
-        animation=false;
-    }
-    public ArrayList<BufferedImage> getAnimation(){
-        return animation_imgs;
     }
 
 }
