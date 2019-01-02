@@ -11,8 +11,8 @@ public class Labyrinth {
 
     public Labyrinth(int dim, Algorithme algo){
         this.algo = algo;
-        start = 0;
-        end = dim*dim-1;
+        start = dim-1;
+        end = (dim*dim)-dim;
         graph = Graph.Grid(dim);
     }
 
