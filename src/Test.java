@@ -113,11 +113,13 @@ public class Test{
     public static void main(String[] args) {
 	int size = 4;
 	Graph G = Graph.Grid(size);
-	Display d = new Display();
-	d.setImage(G.toImage());
-	System.out.println("appuyez sur une touche");
-	new Scanner(System.in).nextLine();
-	d.close();
+	AldousBroder ab = new AldousBroder();
+	ab.getArbreCouvrante(G);
+//	Display d = new Display();
+//	d.setImage(G.toImage());
+//	System.out.println("appuyez sur une touche");
+//	new Scanner(System.in).nextLine();
+//	d.close();
 	printLaby(G,size, "toto.tex");
 	
 	
