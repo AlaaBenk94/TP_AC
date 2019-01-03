@@ -53,20 +53,20 @@ public class Wilson extends Simulated implements Algorithme {
             ArrayList<Edge> adj = graph.getAdj()[sommet];
             Edge suiv = adj.get(random.nextInt(adj.size()));
             chemin.add(suiv);
-            sommet=get_adj(sommet,suiv);
+            sommet=get_suiv(sommet,suiv);
         }
-        chemin=suprimer_rep(chemin);
         return chemin;
     }
 
-    int get_adj(int sommet ,Edge arc ){
+    int get_suiv(int sommet ,Edge arc ){
         if(sommet==arc.from)return arc.to;
         else return arc.from;
     }
 
     void visiter_chemin(ArrayList<Edge> chemin,Graph graph){
         for (Edge arc :chemin){
-            visiter[arc.from]=visiter[arc.to]=true;
+            visiter[arc.from]=true;
+            visiter[arc.to]=true;
             arc.used=true;
             super.drawAnimation(graph,-1,visiter);
         }
@@ -77,46 +77,26 @@ public class Wilson extends Simulated implements Algorithme {
     }
 
     ArrayList<Edge>Eliminer_cycle(ArrayList<Edge> chemin,int depar){
-       ArrayList<Edge> chemin_sans_cycle=new ArrayList<Edge>();
-       int i=0,sommet=depar,lastocur=0;
-
-       while (i<chemin.size()){
-
-           Edge arc=chemin.get(i);
-
-           lastocur=i;
-           for(int j=i+1;j<chemin.size();j++) {
-               if(sommet==chemin.get(j).from||sommet==chemin.get(j).to)lastocur=j;
-           }
-
-           if(lastocur==i){
-               chemin_sans_cycle.add(arc);
-               sommet=get_adj(sommet,arc);
-           }else{
-              i=lastocur;
-              sommet=get_adj(sommet,chemin.get(i));
-              if(i==chemin.size()-1){
-                  chemin_sans_cycle.add(chemin.get(i));
-              }
-           }
-
-           i++;
-       }
-
-      // System.out.print("entrer "+depar+"  ");aff(chemin);
-      // System.out.print("sortie   ");aff(chemin_sans_cycle);
-       return chemin_sans_cycle;
-    }
-
-    ArrayList<Edge>suprimer_rep(ArrayList<Edge> chemin){
-        ArrayList<Edge> chemin_sans_rep=new ArrayList<>();
-        Edge pred=chemin.get(0);
-        chemin_sans_rep.add(pred);
-        for(Edge elem:chemin)
-            if(!elem.egale(pred)){
-                chemin_sans_rep.add(elem);
-                pred=elem;
+        ArrayList<Edge> chemin_sans_cycle=new ArrayList<Edge>();
+        int i=0,sommet=depar,lastocur,nboc;
+        while (i<chemin.size()){
+            lastocur=i;nboc=1;
+            for(int j=i+1;j<chemin.size();j++) {
+                if(sommet==chemin.get(j).from||sommet==chemin.get(j).to){
+                    lastocur=j;
+                    nboc++;
+                }
             }
-        return chemin_sans_rep;
+            if(i==lastocur){
+                chemin_sans_cycle.add(chemin.get(i));
+            }else {
+              if(nboc%4==0)chemin_sans_cycle.add(chemin.get(i));
+                chemin_sans_cycle.add(chemin.get(lastocur));
+                i=lastocur;
+            }
+            sommet=get_suiv(sommet,chemin.get(i));
+            i++;
+        }
+        return chemin_sans_cycle;
     }
 }
