@@ -1,9 +1,10 @@
+import java.util.ArrayList;
+
 public class LabyStatistiques {
 
     private int MoyNbCulSac;
     private double MoyDistance;
     private int nbCycle;
-
 
     public LabyStatistiques(int nbCycle){
         MoyDistance = 0;
@@ -32,11 +33,9 @@ public class LabyStatistiques {
     }
 
     public void printStat(){
-        System.out.println("********************************************************");
         System.out.println("Nombre d'execution : " + this.nbCycle);
         System.out.println("Nombre Moyen des Culs de Sac : " + this.MoyNbCulSac);
         System.out.println("Distance E/S Moyenne : " + this.MoyDistance);
-        System.out.println("********************************************************");
     }
 
     public static LabyStatistiques lancer(int n, Labyrinth laby) {
@@ -61,16 +60,22 @@ public class LabyStatistiques {
         return stat;
     }
 
-
     /**
      * Pour les tests
      */
     public static void main(String[] args){
 
-        LabyStatistiques stat = LabyStatistiques.lancer(1000, Labyrinth.creerLabyrinth(20, new AldousBroder()));
+        System.out.println("////////////////////////////// Labyrith par l'Algo de Kruskal //////////////////////////");
+        LabyStatistiques stat = LabyStatistiques.lancer(1000, Labyrinth.creerLabyrinth(20, new Kruskal()));
         stat.printStat();
-        stat = LabyStatistiques.lancer(1000, Labyrinth.creerLabyrinth(20, new Kruskal()));
+        System.out.println();
+
+
+        System.out.println("////////////////////////////// Labyrith par l'Algo de Aldous-Broder //////////////////////////");
+        stat = LabyStatistiques.lancer(1000, Labyrinth.creerLabyrinth(20, new AldousBroder()));
         stat.printStat();
+        System.out.println();
+
     }
 
 
