@@ -1,3 +1,5 @@
+package premiere_partie;
+
 public class FindUnion {
     private int[] parent;
     public FindUnion(int taille){

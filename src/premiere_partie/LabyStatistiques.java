@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+package premiere_partie;
 
 public class LabyStatistiques {
 

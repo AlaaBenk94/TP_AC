@@ -1,3 +1,5 @@
+package premiere_partie;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;

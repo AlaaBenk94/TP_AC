@@ -1,3 +1,5 @@
+package premiere_partie;
+
 import javax.swing.*;
 import java.util.ArrayList;
 

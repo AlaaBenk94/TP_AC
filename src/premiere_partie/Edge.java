@@ -1,3 +1,5 @@
+package premiere_partie;
+
 class Edge
 {
    int from;

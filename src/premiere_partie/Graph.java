@@ -1,8 +1,7 @@
-import org.w3c.dom.css.RGBColor;
+package premiere_partie;
 
 import java.util.ArrayList;
 import java.io.*;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.*;
 

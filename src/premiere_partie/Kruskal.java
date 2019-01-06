@@ -1,4 +1,5 @@
-import java.awt.image.BufferedImage;
+package premiere_partie;
+
 import java.util.ArrayList;
 import java.util.Random;
 

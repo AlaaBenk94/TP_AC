@@ -1,4 +1,5 @@
-import javax.swing.*;
+package premiere_partie;
+
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 

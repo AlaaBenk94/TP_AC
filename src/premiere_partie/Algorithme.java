@@ -1,3 +1,5 @@
+package premiere_partie;
+
 import java.util.ArrayList;
 
 public interface Algorithme {

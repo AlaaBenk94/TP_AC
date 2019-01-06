@@ -1,3 +1,5 @@
+package premiere_partie;
+
 public abstract class Simulated {
 
     protected  boolean animationON;
