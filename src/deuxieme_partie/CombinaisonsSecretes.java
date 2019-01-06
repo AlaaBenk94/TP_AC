@@ -5,16 +5,17 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CombinaisonsSecretes {
 
-    public ArrayList<Proposition> combinaisonsSecretes;
+    public static ArrayList<String> combinaisonsSecretes;
 
     public CombinaisonsSecretes(){
         combinaisonsSecretes = new ArrayList<>();
     }
 
-    public static CombinaisonsSecretes genererCombinaisonsSecretes(int k, int n, Evaluation eval){
+    public static CombinaisonsSecretes genererCombinaisonsSecretes(int k, int n){
 
         CombinaisonsSecretes ret = new CombinaisonsSecretes();
 
@@ -25,11 +26,7 @@ public class CombinaisonsSecretes {
 
             while((s = br.readLine()) != null){
                 s = s.replace(",","");
-                Proposition p = new Proposition(s);
-                eval.evaluer(p);
-                ret.combinaisonsSecretes.add(p);
-
-                System.out.println(p.toString());
+                ret.combinaisonsSecretes.add(s);
             }
 
             System.out.println(ret.combinaisonsSecretes.size());
@@ -44,15 +41,29 @@ public class CombinaisonsSecretes {
     }
 
 
-    public int nbCompatible(int b, int m){
-        int ret = 0;
-
-        for(Proposition p : combinaisonsSecretes){
-            if(p.b == b && p.m == m)
-                ret++;
+    public static ArrayList<String> nbCompatible(Proposition prop){
+        ArrayList<String> ret = new ArrayList<>();
+        int[] res;
+        for(String p : combinaisonsSecretes){
+            res = Evaluation.evaluer(p, prop);
+            if(res[0]==prop.b && res[1]==prop.m)
+                ret.add(p);
         }
 
         return ret;
     }
+
+    public static ArrayList<String> intersection(ArrayList<String> list1, ArrayList<String> list2) {
+        ArrayList<String> list = new ArrayList<String>();
+
+        for (String t : list1) {
+            if(list2.contains(t)) {
+                list.add(t);
+            }
+        }
+
+        return list;
+    }
+
 
 }

@@ -16,7 +16,11 @@ public class Evaluation {
         return sol;
     }
 
-    public void evaluer(Proposition prop) {
+    /**
+     * Evaluer par rapport a la solution
+     * @param prop
+     */
+    public boolean evaluer(Proposition prop) {
 
         prop.b = 0;
         prop.m = 0;
@@ -30,25 +34,41 @@ public class Evaluation {
                     prop.m++;
             }
         }
+
+        if(prop.b == sol.length() && prop.m == 0)
+            return true;
+        return false;
+
+    }
+
+    /**
+     * Evaluer par rapport a une solution donnée
+     * @param prop
+     */
+    public static int[] evaluer(String prop, Proposition target) {
+
+        int b = 0;
+        int m = 0;
+
+        for(int i=0; i<prop.length(); i++) {
+            int index = target.s.indexOf(prop.charAt(i));
+            if( index != -1){
+                if(index == i)
+                    b++;
+                else
+                    m++;
+            }
+        }
+
+        return new int[]{b,m};
+
     }
 
 
     public static void main(String[] args){
 
         Evaluation e = new Evaluation("1234");
-        Proposition k;
-        e.evaluer(k = new Proposition("1258"));
-        System.out.println(k.toString());
-        e.evaluer(k = new Proposition("1253"));
-        System.out.println(k.toString());
-        e.evaluer(k = new Proposition("6857"));
-        System.out.println(k.toString());
-        e.evaluer(k = new Proposition("6457"));
-        System.out.println(k.toString());
-        e.evaluer(k = new Proposition("2413"));
-        System.out.println(k.toString());
-        e.evaluer(k = new Proposition("1234"));
-        System.out.println(k.toString());
+
 
     }
 
