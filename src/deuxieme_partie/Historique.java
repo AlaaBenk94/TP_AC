@@ -1,21 +1,22 @@
 package deuxieme_partie;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Historique {
 
-    private HashMap<String, Proposition> history;
+    private ArrayList<Proposition> history;
 
     public Historique(){
-        history = new HashMap<>();
+        history = new ArrayList<>();
     }
 
     public void add(Proposition p) {
-        history.put(p.s, p);
+        history.add(p);
     }
 
     public void remove(Proposition p) {
-        history.remove(p.s);
+        history.remove(p);
     }
 
 }
