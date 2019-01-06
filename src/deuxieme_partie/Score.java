@@ -8,36 +8,15 @@ import java.util.ArrayList;
 
 public class Score {
 
-    public ArrayList<Proposition> combinaisonsSecretes;
     public int n;
     public int k;
-
-
 
     public Score(int k, int n){
         this.k = k;
         this.n = n;
-        combinaisonsSecretes = new ArrayList<>();
     }
 
-    public void genererCombinaisonsSecretes(){
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("/home/alaabenk/Desktop/cas.csv"));
-            String s;
-            while((s = br.readLine()) != null){
-                s = s.replace(",","");
-                combinaisonsSecretes.add(new Proposition(s));
-            }
 
-            System.out.println(combinaisonsSecretes.size());
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public static int calculerScore(Historique hist, Proposition prop){
 
@@ -47,7 +26,12 @@ public class Score {
     }
 
     public static void main(String[] args){
-        (new Score(6, 4)).genererCombinaisonsSecretes();
+        CombinaisonsSecretes cs = CombinaisonsSecretes.genererCombinaisonsSecretes(-1, -1, new Evaluation("1234"));
+        System.out.println(cs.nbCompatible(0, 0));
+        System.out.println(cs.nbCompatible(1, 2));
+        System.out.println(cs.nbCompatible(2, 1));
+        System.out.println(cs.nbCompatible(4, 0));
+        System.out.println(cs.nbCompatible(0, 4));
     }
 
 }
