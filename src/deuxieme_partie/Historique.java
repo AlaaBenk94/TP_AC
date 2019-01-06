@@ -10,6 +10,6 @@ public class Historique {
         history = new HashMap<>();
     }
 
-    public void addToHistoy(String)
+    public void addToHistoy(String s){}
 
 }

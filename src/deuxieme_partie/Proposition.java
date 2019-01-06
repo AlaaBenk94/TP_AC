@@ -2,14 +2,18 @@ package deuxieme_partie;
 
 public class Proposition {
 
-    public String prop;
+    public String s;
     public int b;
     public int m;
 
     public Proposition(String prop){
-        prop = prop;
+        s = prop;
         b = 0;
         m = 0;
     }
 
+    @Override
+    public String toString() {
+        return s + " : (" + b + "," + m + ")";
+    }
 }
