@@ -1,7 +1,5 @@
 package deuxieme_partie;
 
-import java.util.HashMap;
-
 public class Proposition {
 
     public String s;

@@ -1,7 +1,6 @@
 package deuxieme_partie;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Historique {
 
