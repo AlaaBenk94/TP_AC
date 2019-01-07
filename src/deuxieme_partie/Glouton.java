@@ -33,7 +33,6 @@ public class Glouton {
             }
             i++;
             System.out.println("Meilleur " + i + " : -> " + meilleur.toString() + " apres  " + hist.history.size() + " coups.");
-//            System.out.println(hist.history.toString());
         }
 
         System.out.println(meilleur.toString());
