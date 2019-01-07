@@ -14,13 +14,15 @@ public class Historique {
     }
 
     public void add(Proposition p){
+        if(contain(p))
+            return;
         history.add(p);
         recalculerCompatibe(p);
     }
 
-    public boolean contains(Proposition prop){
+    public boolean contain(Proposition prop){
         for(Proposition p : history){
-            if(p.s == prop.s)
+            if(p.s.equals(prop.s))
                 return true;
         }
         return false;
@@ -39,6 +41,20 @@ public class Historique {
 
     public boolean empty(){
         return history.isEmpty();
+    }
+
+    public static void main(String[] args){
+        CombinaisonsSecretes.genererCombinaisonsSecretes();
+        Historique h = new Historique();
+        h.add(new Proposition("3421"));
+        h.add(new Proposition("4231"));
+        h.add(new Proposition("1234"));
+        h.add(new Proposition("2146"));
+        h.add(new Proposition("2146"));
+        h.add(new Proposition("2146"));
+
+        System.out.println(h.history.toString());
+
     }
 
 }

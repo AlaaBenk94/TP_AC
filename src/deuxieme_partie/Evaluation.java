@@ -21,6 +21,8 @@ public class Evaluation {
      * @param prop
      */
     public boolean evaluer(Proposition prop) {
+        if(prop == null)
+            return false;
 
         prop.b = 0;
         prop.m = 0;

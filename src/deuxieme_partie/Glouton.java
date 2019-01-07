@@ -7,43 +7,33 @@ import static deuxieme_partie.CombinaisonsSecretes.combinaisonsSecretes;
 public class Glouton {
 
     public static void main(String[] args){
-        CombinaisonsSecretes.genererCombinaisonsSecretes(-1, -1);
+        CombinaisonsSecretes.genererCombinaisonsSecretes();
         Historique hist = new Historique();
-        Score sc = new Score();
+        Score sc;
 
         // choisir une solution aléatoire
         Random rand = new Random();
         Proposition meilleur = new Proposition(combinaisonsSecretes.get(rand.nextInt(combinaisonsSecretes.size())));
         Proposition proposition;
         // Choisir l'evaluation et solution
-        Evaluation eval = new Evaluation("12");
+        Evaluation eval = new Evaluation("1234");
         int i = 0, max;
         while(!eval.evaluer(meilleur)){
             hist.add(meilleur);
-            System.out.println("Iteration : " + (i) );
-            max = 0;
+            max = -1;
             for(String s: combinaisonsSecretes) {
-
                 proposition = new Proposition(s);
                 sc = Score.calculerScore(hist, proposition);
-                if(sc.c > max && !hist.contains(proposition)){
+                if(sc.c > max && !hist.contain(proposition)){
                     max = sc.c;
                     meilleur = proposition;
                     meilleur.b = sc.b;
                     meilleur.m = sc.m;
-                    System.out.println("**********************************************************");
-                    System.out.println("YAW RAHO DKHEL");
-                    System.out.println("**********************************************************");
                 }
-
-//                System.out.println("Proposition :-> " + proposition.toString() + " avec " + sc.c + " " + sc.b + " " + sc.m);
-
             }
             i++;
-            System.out.println("Meilleur :-> " + meilleur.toString() + " avec " + max);
-            System.out.println("Historique :-> " + hist.history.size() + " " + hist.history.toString());
-            System.out.println("*****************************************************************************************");
-
+            System.out.println("Meilleur " + i + " : -> " + meilleur.toString() + " apres  " + hist.history.size() + " coups.");
+//            System.out.println(hist.history.toString());
         }
 
         System.out.println(meilleur.toString());

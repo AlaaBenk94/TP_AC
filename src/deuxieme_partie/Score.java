@@ -1,5 +1,13 @@
 package deuxieme_partie;
 
+import javax.swing.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import static deuxieme_partie.CombinaisonsSecretes.combinaisonsSecretes;
+
 public class Score {
 
     public int b;
@@ -10,46 +18,64 @@ public class Score {
         return "(" + b + "," + m + "," + c + ")";
     }
 
-    public static Score calculerScore(Historique hist, Proposition prop){
-        Score score = new Score();
-        score.c = 0;
-        int s=0;
-
-        for(Proposition p : hist.history){
-            prop.b = p.b;
-            prop.m = p.m;
-            s = CombinaisonsSecretes.intersection(CombinaisonsSecretes.nbCompatible(prop),hist.compatibles).size();
-            if(s > score.c) {
-                score.b = p.b;
-                score.m = p.m;
-                score.c = s;
+    public static int[] maxBM(Proposition p, Historique h){
+        HashMap<String, ArrayList<String>> list = new HashMap<>();
+        for(String s : combinaisonsSecretes){
+            if(!s.equals(p.s)){
+                int[] k = Evaluation.evaluer(s, p);
+                if(list.containsKey(k[0] + ":" + k[1])){
+                    list.get(k[0] + ":" + k[1]).add(s);
+                } else {
+                    ArrayList l = new ArrayList<String>();
+                    l.add(s);
+                    list.put(k[0] + ":" + k[1],l);
+                }
             }
         }
+
+        int[] bm = new int[3];
+        bm[2] = 0;
+        for(Map.Entry<String, ArrayList<String>> entry : list.entrySet()){
+            ArrayList<String> temp = CombinaisonsSecretes.intersection(list.get(entry.getKey()), h.compatibles);
+            list.put(entry.getKey(), temp);
+            if(bm[2] < temp.size()){
+                String[] s = entry.getKey().split(":");
+                bm[0] = Integer.parseInt(s[0]);
+                bm[1] = Integer.parseInt(s[1]);
+                bm[2] = temp.size();
+            }
+        }
+
+
+        return bm;
+
+    }
+
+    public static Score calculerScore(Historique hist, Proposition prop){
+        Score score = new Score();
+        int[] sc = Score.maxBM(prop, hist);
+
+        score.b = sc[0];
+        score.m = sc[1];
+        score.c = sc[2];
 
         return score;
     }
 
     public static void main(String[] args){
-        CombinaisonsSecretes cs = CombinaisonsSecretes.genererCombinaisonsSecretes(-1, -1);
-        Historique hist = new Historique();
-        Evaluation eval = new Evaluation("12");
-        Proposition p = new Proposition("45");
-        p = new Proposition("45");
+        CombinaisonsSecretes.genererCombinaisonsSecretes();
+        Evaluation eval = new Evaluation("14");
+        Historique h = new Historique();
+        Proposition p = new Proposition("23");
         eval.evaluer(p);
+        h.add(p);
         System.out.println(p.toString());
-        hist.add(p);
 
-        p = new Proposition("43");
-        eval.evaluer(p);
-        System.out.println(p.toString());
-        hist.add(p);
-
-        System.out.println(hist.history.toString());
-        System.out.println(hist.compatibles.size());
-
-        for (String s : CombinaisonsSecretes.combinaisonsSecretes){
-            Score score = Score.calculerScore(hist, new Proposition(s));
-            System.out.println(s + " => " + score.toString());
+        for(String s: combinaisonsSecretes) {
+            if(!h.contain(new Proposition(s))) {
+                Score score = Score.calculerScore(h, new Proposition(s));
+                System.out.println(s + " : " + score.toString());
+            }
         }
 
     }

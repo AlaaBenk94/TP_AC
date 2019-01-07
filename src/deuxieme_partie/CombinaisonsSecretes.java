@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class CombinaisonsSecretes {
 
@@ -15,13 +14,13 @@ public class CombinaisonsSecretes {
         combinaisonsSecretes = new ArrayList<>();
     }
 
-    public static CombinaisonsSecretes genererCombinaisonsSecretes(int k, int n){
+    public static CombinaisonsSecretes genererCombinaisonsSecretes(){
 
         CombinaisonsSecretes ret = new CombinaisonsSecretes();
 
         try {
 
-            BufferedReader br = new BufferedReader(new FileReader("/home/alaabenk/Desktop/cas.csv"));
+            BufferedReader br = new BufferedReader(new FileReader("deuxieme_partie/cas.csv"));
             String s;
 
             while((s = br.readLine()) != null){
