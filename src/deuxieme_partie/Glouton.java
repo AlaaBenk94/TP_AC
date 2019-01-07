@@ -13,7 +13,7 @@ public class Glouton {
 
         // choisir une solution aléatoire
         Random rand = new Random();
-        Proposition meilleur = new Proposition(combinaisonsSecretes.get(rand.nextInt(combinaisonsSecretes.size())));
+        Proposition meilleur = new Proposition(combinaisonsSecretes.get(5));
         Proposition proposition;
         // Choisir l'evaluation et solution
         Evaluation eval = new Evaluation("1234");
