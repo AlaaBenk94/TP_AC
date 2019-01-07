@@ -62,22 +62,4 @@ public class Score {
         return score;
     }
 
-    public static void main(String[] args){
-        CombinaisonsSecretes.genererCombinaisonsSecretes();
-        Evaluation eval = new Evaluation("14");
-        Historique h = new Historique();
-        Proposition p = new Proposition("23");
-        eval.evaluer(p);
-        h.add(p);
-        System.out.println(p.toString());
-
-        for(String s: combinaisonsSecretes) {
-            if(!h.contain(new Proposition(s))) {
-                Score score = Score.calculerScore(h, new Proposition(s));
-                System.out.println(s + " : " + score.toString());
-            }
-        }
-
-    }
-
 }

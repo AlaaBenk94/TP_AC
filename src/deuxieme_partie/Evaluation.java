@@ -66,12 +66,4 @@ public class Evaluation {
 
     }
 
-
-    public static void main(String[] args){
-
-        Evaluation e = new Evaluation("1234");
-
-
-    }
-
 }

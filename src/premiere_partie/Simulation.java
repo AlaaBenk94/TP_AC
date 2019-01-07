@@ -1,5 +1,6 @@
 package premiere_partie;
 
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -14,6 +15,7 @@ public class Simulation {
     Simulation(){
         CurrentFrame = 0;
         disp = new Display();
+        disp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         delay = 200;
         clips = new ArrayList<>();
     }
@@ -57,13 +59,10 @@ public class Simulation {
 //        Kruskal k = new Kruskal(sim);
 //        k.getArbreCouvrante(Graph.Grid(5));
 
-        while (true) {
-            Wilson w = new Wilson(sim);
-            w.getArbreCouvrante(Graph.Grid(5));
-            sim.play();
-            for (int i=0;i<20;i++)sim.delay();
-            //sim.close();
-        }
+        Wilson w = new Wilson(sim);
+        w.getArbreCouvrante(Graph.Grid(5));
+        sim.setDelay(500);
+        sim.play();
 
     }
 
